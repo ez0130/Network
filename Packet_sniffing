@@ -1,0 +1,25 @@
+from scapy.all import *
+
+# Function to process captured packets
+def packet_handler(packet):
+    if packet.haslayer(IP):
+        # Extracting packet details
+        source_ip = packet[IP].src
+        destination_ip = packet[IP].dst
+        protocol = packet[IP].proto
+        
+        # Displaying packet details
+        print(f"Source IP: {source_ip}, Destination IP: {destination_ip}, Protocol: {protocol}")
+
+# Function to start packet capture
+def start_sniffing():
+    print("Starting packet capture...")
+    sniff(prn=packet_handler, store=False)
+
+# Main function
+def main():
+    start_sniffing()
+
+# Entry point
+if __name__ == "__main__":
+    main()
